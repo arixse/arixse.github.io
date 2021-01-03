@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="Javascript,Promise">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手写一个Promise">
+<meta property="og:url" content="http://yoursite.com/2019/03/31/promise/index.html">
+<meta property="og:site_name" content="ShengFu&#39;s blog">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://images.pexels.com/photos/2061057/pexels-photo-2061057.jpeg?cs=srgb&dl=adorable-animal-bed-2061057.jpg&fm=jpg">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/149846/1553841212355-dc481bad-250e-4b16-9207-a221230c6fba.png#align=left&display=inline&height=277&originHeight=297&originWidth=801&size=0&status=done&width=746">
+<meta property="og:updated_time" content="2021-01-02T10:50:07.333Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手写一个Promise">
+<meta name="twitter:image" content="https://images.pexels.com/photos/2061057/pexels-photo-2061057.jpeg?cs=srgb&dl=adorable-animal-bed-2061057.jpg&fm=jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ShengFu's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/31/promise/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>手写一个Promise | ShengFu's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ShengFu's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">前端，Javascript，html，css,html5,Vue,React,Angular</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/arixse" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/promise/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ShengFu">
+      <meta itemprop="description" content="前端经验总结与知识分享">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ShengFu's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">手写一个Promise
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-31 20:47:03" itemprop="dateCreated datePublished" datetime="2019-03-31T20:47:03+08:00">2019-03-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-02 18:50:07" itemprop="dateModified" datetime="2021-01-02T18:50:07+08:00">2021-01-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Javascript/" itemprop="url" rel="index"><span itemprop="name">Javascript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/31/promise/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/31/promise/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://images.pexels.com/photos/2061057/pexels-photo-2061057.jpeg?cs=srgb&amp;dl=adorable-animal-bed-2061057.jpg&amp;fm=jpg" alt=""><br><a id="more"></a></p>
+<p><a name="df45c20f"></a></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Promise是为了解决Javascript回调嵌套过多导致回调地狱（callbackhell）而产生的。目前已被纳入了es2015规范，主流浏览器都支持Promise。为了在工作中更好的运用Promise,我们需要理解Promise规范与内部实现机制，下面我们来手动实现一个Promise。</p>
+<p><a name="2d7cd21f"></a></p>
+<h2 id="Promise-A-规范"><a href="#Promise-A-规范" class="headerlink" title="Promise/A+规范"></a>Promise/A+规范</h2><p>在写代码之前让我们先了解下 Promise/A+规范。<br>一个promise有三种状态：</p>
+<ul>
+<li>pending:表示初始状态，可以转移到 fullfilled 或者 rejected 状态</li>
+<li>fulfilled:表示操作成功，不可转移状态</li>
+<li>rejected:表示操作失败，不可转移状态</li>
+<li>必须有一个 then 异步执行方法，then 接受两个参数且必须返回一个promise：</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2019/png/149846/1553841212355-dc481bad-250e-4b16-9207-a221230c6fba.png#align=left&amp;display=inline&amp;height=277&amp;originHeight=297&amp;originWidth=801&amp;size=0&amp;status=done&amp;width=746" alt=""></p>
+<p>借用这张来自MDN的流程图我们可以清晰的看到 Promise 状态的流转过程。</p>
+<p><a name="7920d5ef"></a></p>
+<h2 id="简单版"><a href="#简单版" class="headerlink" title="简单版"></a>简单版</h2><p>下面我们来实现一个简单版的 Promise:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise1</span>(<span class="params">executor</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line">	self.status = <span class="string">'pending'</span>;</span><br><span class="line">  self.value = <span class="literal">undefined</span>;</span><br><span class="line">  self.reason = <span class="literal">undefined</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  	<span class="keyword">if</span>(self.status===<span class="string">'pending'</span>)&#123;</span><br><span class="line">    	self.status = <span class="string">'fullfilled'</span>;</span><br><span class="line">      self.value = value;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reject</span>(<span class="params">reason</span>) </span>&#123;</span><br><span class="line">  	<span class="keyword">if</span>(self.status===<span class="string">'pending'</span>) &#123;</span><br><span class="line">    	self.status = <span class="string">'rejected'</span>;</span><br><span class="line">      self.reason = reason;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">  	executor(resolve,reject);</span><br><span class="line">  &#125;<span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  	reject(e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Promise1.prototype.then = <span class="function"><span class="keyword">function</span>(<span class="params">onFullfilled,onRejected</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.status===<span class="string">'fullfilled'</span>) &#123;</span><br><span class="line">  	onFullfilled(<span class="keyword">this</span>.value);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span>.status===<span class="string">'rejected'</span>) &#123;</span><br><span class="line">  	onRejected(<span class="keyword">this</span>.reason);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试</span></span><br><span class="line"><span class="keyword">let</span> p= <span class="keyword">new</span> Promise1(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;resolve(<span class="number">1</span>)&#125;);</span><br><span class="line">p.then(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;<span class="built_in">console</span>.log(x)&#125;)</span><br><span class="line"><span class="comment">//输出1</span></span><br></pre></td></tr></table></figure>
+<p><a name="8a03c7d9"></a></p>
+<h2 id="支持异步"><a href="#支持异步" class="headerlink" title="支持异步"></a>支持异步</h2><p>现在，我们实现了最简单的 Promise。以上版本的Promise是存在很多问题的。为什么呢？最大的问题是它不支持异步，然而在现实中，Promise绝大多数使用场景都是异步。让我们来为 Promise 加入异步功能。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PENDING = <span class="string">'pending'</span>;</span><br><span class="line"><span class="keyword">const</span> FULFILLED = <span class="string">'fullfilled'</span>;</span><br><span class="line"><span class="keyword">const</span> REJECTED = <span class="string">'rejected'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise1</span>(<span class="params">executor</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line">	self.status = PENDING;</span><br><span class="line">  self.value = <span class="literal">undefined</span>;</span><br><span class="line">  self.reason = <span class="literal">undefined</span>;</span><br><span class="line">  self.fullfilledCallbacks = [];</span><br><span class="line">  self.rejectedCallbacks = [];</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(value <span class="keyword">instanceof</span> <span class="built_in">Promise</span>) &#123;</span><br><span class="line">    	value.then(resolve,reject);</span><br><span class="line">    &#125;</span><br><span class="line">  	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(self.status===PENDING)&#123;</span><br><span class="line">        self.status = FULFILLED;</span><br><span class="line">        self.value = value;</span><br><span class="line">        self.fullfilledCallbacks.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123;</span><br><span class="line">        	cb(self.value)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reject</span>(<span class="params">reason</span>) </span>&#123;</span><br><span class="line">  	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(self.status===PENDING) &#123;</span><br><span class="line">        self.status = REJECTED;</span><br><span class="line">        self.reason = reason;</span><br><span class="line">        self.rejectedCallbacks.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123;</span><br><span class="line">        	cb(self.reason);</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">  	executor(resolve,reject);</span><br><span class="line">  &#125;<span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  	reject(e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Promise1.prototype.then = <span class="function"><span class="keyword">function</span>(<span class="params">onFulfilled,onRejected</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Promise1(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">  		<span class="function"><span class="keyword">function</span> <span class="title">success</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> _value = (<span class="keyword">typeof</span> onFulfilled === <span class="string">'function'</span> &amp;&amp; onFulfilled(value)) || value;</span><br><span class="line">        resolve(_value)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">error</span>(<span class="params">reason</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> _reason = (<span class="keyword">typeof</span> onRejected === <span class="string">'function'</span> &amp;&amp; onRejected(reason)) || reason;</span><br><span class="line">        reject(_reason);</span><br><span class="line">      &#125;</span><br><span class="line">    	<span class="keyword">if</span>(self.status==PENDING) &#123;</span><br><span class="line">      	self.fullfilledCallbacks.push(success);</span><br><span class="line">        self.rejectedCallbacks.push(error);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(self.status==FULLFILLED)&#123;</span><br><span class="line">      	success.call(<span class="keyword">this</span>,<span class="keyword">this</span>.value)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(self.status==REJECTED) &#123;</span><br><span class="line">      	error.call(<span class="keyword">this</span>,<span class="keyword">this</span>.reason);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码中，我们做了如下更改：</p>
+<ol>
+<li>将 Promise 三个状态定义为常量，方便维护</li>
+<li>对于 Promise resolve和reject 函数执行加入异步处理</li>
+<li>在Promise.then中返回新的Promise对象，使Promise可以支持链式调用</li>
+</ol>
+<p><a name="852384c0"></a></p>
+<h2 id="错误处理以及静态方法"><a href="#错误处理以及静态方法" class="headerlink" title="错误处理以及静态方法"></a>错误处理以及静态方法</h2><p>下面让我们来为Promise 添加错误处理以及静态方法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//错误处理</span></span><br><span class="line">Promise1.prototype.catch = <span class="function"><span class="keyword">function</span>(<span class="params">onRejected</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.then(<span class="literal">null</span>, onRejected);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//返回fullfilled Promise对象</span></span><br><span class="line">Promise1.resolve = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Promise1(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(value);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//返回 rejected Promise 对象</span></span><br><span class="line">Promise1.reject = <span class="function"><span class="keyword">function</span> (<span class="params">reason</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Promise1(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        reject(reason);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Promise.all方法</span></span><br><span class="line">Promise1.all = <span class="function"><span class="keyword">function</span>(<span class="params">promises</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">gen</span>(<span class="params">length, resolve</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">let</span> values = [];</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">i, value</span>) </span>&#123;</span><br><span class="line">            values[i] = value;</span><br><span class="line">            <span class="keyword">if</span> (++count === length) &#123;</span><br><span class="line">                resolve(values);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Promise1(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> done = gen(promises.length, resolve);</span><br><span class="line">        promises.forEach(<span class="function">(<span class="params">promise, index</span>) =&gt;</span> &#123;</span><br><span class="line">            promise.then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">                done(index, value)</span><br><span class="line">            &#125;, reject)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Promise.race方法</span></span><br><span class="line">Promise1.race = <span class="function"><span class="keyword">function</span>(<span class="params">promises</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Promise1(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        promises.forEach(<span class="function">(<span class="params">promise, index</span>) =&gt;</span> &#123;</span><br><span class="line">           promise.then(resolve, reject);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有个问题，就是在当我们console.log(Promise1.resolve(‘a’))的时候，我发现打印出来的状态竟然是 pending状态，我猜想原因是应该是resolve中函数异步执行，在当我们console的时候setTimeout中代码未执行，所以我给出的解决方法是将状态变化与赋值移到setTimeout外面，这样就不会产生刚才的问题了，更改后代码长这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(value <span class="keyword">instanceof</span> <span class="built_in">Promise</span>) &#123;</span><br><span class="line">    	value.then(resolve,reject);</span><br><span class="line">    &#125;</span><br><span class="line">  	self.status = FULFILLED;</span><br><span class="line">  	self.value = value;</span><br><span class="line">  	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(self.status===PENDING)&#123;</span><br><span class="line">        self.fullfilledCallbacks.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123;</span><br><span class="line">        	cb(self.value)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reject</span>(<span class="params">reason</span>) </span>&#123;</span><br><span class="line">    self.status = REJECTED;</span><br><span class="line">    self.reason = reason;</span><br><span class="line">  	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(self.status===PENDING) &#123;</span><br><span class="line">        self.rejectedCallbacks.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123;</span><br><span class="line">        	cb(self.reason);</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><a name="25f9c7fa"></a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>经过以上实践，我们成功的手写了一个功能完备的 Promise。这里给我的最大启发是如果我们想学习一个东西，必须深入到它的底层，了解它的运行原理与具体实现方法，并且可以造一个简单的轮子，这样才算我们掌握了该知识点。从前的我对于这一点没有关注的太多，导致在用某个知识点时只是掌握的它的表层用法，在高级一点的使用场景时完全不会运用。以后我会更加注重源码方面的学习，弥补我这方面的不足。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          
+            <a href="/tags/Promise/" rel="tag"># Promise</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/10/为什么要做代码审查/" rel="next" title="为什么要代码审查">
+                <i class="fa fa-chevron-left"></i> 为什么要代码审查
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/31/ts-基本类型/" rel="prev" title="Typescript学习-基本类型">
+                Typescript学习-基本类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="ShengFu">
+            
+              <p class="site-author-name" itemprop="name">ShengFu</p>
+              <p class="site-description motion-element" itemprop="description">前端经验总结与知识分享</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/arixse" title="GitHub &rarr; https://github.com/arixse" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:fusheng39@gmail.com" title="E-Mail &rarr; mailto:fusheng39@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-A-规范"><span class="nav-number">2.</span> <span class="nav-text">Promise/A+规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单版"><span class="nav-number">3.</span> <span class="nav-text">简单版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持异步"><span class="nav-number">4.</span> <span class="nav-text">支持异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理以及静态方法"><span class="nav-number">5.</span> <span class="nav-text">错误处理以及静态方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengFu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+  
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'fQvREDq9PS1FGdzOzlzgyT1d-gzGzoHsz',
+    appKey: '9zS6fOeVSHnBxpTplIUzROfQ',
+    placeholder: '输入你的看法吧',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+</html>

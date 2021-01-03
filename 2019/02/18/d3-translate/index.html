@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="D3,数据可视化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="D3官方网站首页翻译">
+<meta property="og:url" content="http://yoursite.com/2019/02/18/d3-translate/index.html">
+<meta property="og:site_name" content="ShengFu&#39;s blog">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://d3js.org.cn/home.png">
+<meta property="og:updated_time" content="2021-01-02T10:50:07.332Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="D3官方网站首页翻译">
+<meta name="twitter:image" content="https://d3js.org.cn/home.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ShengFu's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/18/d3-translate/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>D3官方网站首页翻译 | ShengFu's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ShengFu's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">前端，Javascript，html，css,html5,Vue,React,Angular</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/arixse" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/d3-translate/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ShengFu">
+      <meta itemprop="description" content="前端经验总结与知识分享">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ShengFu's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">D3官方网站首页翻译
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-18 23:05:02" itemprop="dateCreated datePublished" datetime="2019-02-18T23:05:02+08:00">2019-02-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-02 18:50:07" itemprop="dateModified" datetime="2021-01-02T18:50:07+08:00">2021-01-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/翻译计划/" itemprop="url" rel="index"><span itemprop="name">翻译计划</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/02/18/d3-translate/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/18/d3-translate/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://d3js.org.cn/home.png" alt=""><br><a id="more"></a><br><!--D3.js is a JavaScript library for manipulating documents based on data. D3 helps you bring data to life using HTML, SVG, and CSS. D3’s emphasis on web standards gives you the full capabilities of modern browsers without tying yourself to a proprietary framework, combining powerful visualization components and a data-driven approach to DOM manipulation.--></p>
+<p>D3.js 是一个基于数据来操作文档的的 Javascript 库。D3 帮助您使用 HTML,SVG 和 CSS 来使数据栩栩如生。D3 在 web 标准上的重点在于不用自己私有的框架就可以给与你现代浏览器完整的结合了强大的 DOM 操作可视化组件和数据驱动方式的功能。</p>
+<!--Download the latest version (5.9.1) here:-->
+<p>最新版本（5.9.1）在这里下载：</p>
+<ul>
+<li><a href="https://github.com/d3/d3/releases/download/v5.9.1/d3.zip" target="_blank" rel="noopener">D3.zip</a></li>
+</ul>
+<!--To link directly to the latest release, copy this snippet:-->
+<p>复制下面这段内容来直接链接到最新发布的版本：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://d3js.org/d3.v5.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<!--The full source and tests are also available for download on GitHub.-->
+<p>完整的资源和测试也可以在 Github 上下载。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><!--Read more tutorials.-->
+<!--D3 allows you to bind arbitrary data to a Document Object Model (DOM), and then apply data-driven transformations to the document. For example, you can use D3 to generate an HTML table from an array of numbers. Or, use the same data to create an interactive SVG bar chart with smooth transitions and interaction.-->
+<p>D3 允许您绑定任意数据到 DOM 对象上，并且然后应用数据驱动转换到文档上。例如，您可以用 D3 从一个数组 生成一个 HTML 表格。或者用相同的数据创建栩栩如生的 SVG 柱状图。<a href="https://github.com/d3/d3/wiki/Tutorials" target="_blank" rel="noopener">阅读更多的教程</a></p>
+<!--D3 is not a monolithic framework that seeks to provide every conceivable feature. Instead, D3 solves the crux of the problem: efficient manipulation of documents based on data. This avoids proprietary representation and affords extraordinary flexibility, exposing the full capabilities of web standards such as HTML, SVG, and CSS. With minimal overhead, D3 is extremely fast, supporting large datasets and dynamic behaviors for interaction and animation. D3’s functional style allows code reuse through a diverse collection of official and community-developed modules.-->
+<p>D3不是一个单独力求提供所有可想到的功能的框架。相反，D3解决了问题的关键：基于数据高效的文档操作。这避免了专有的表示，并提供了非凡的灵活性，暴露了HTML，SVG和CSS等Web标准的全部功能。 D3 的开销极小，支持大型数据集和交互动画的动态行为。<br>D3 的函数式风格允许通过官方和各种社区开发的模块复用代码。</p>
+<!--#Selections-->
+<h1 id="选择集"><a href="#选择集" class="headerlink" title="选择集"></a>选择集</h1><!--Read more about selections.-->
+<p>Modifying documents using the W3C DOM API is tedious: the method names are verbose, and the imperative approach requires manual iteration and bookkeeping of temporary state. For example, to change the text color of paragraph elements:</p>
+<p>使用W3C DOM API修改文档非常繁琐：方法名称冗长，命令式方法需要手动迭代和临时状态缓存。例如，改变一个段落标签的字体颜色：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paragraphs = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"p"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; paragraphs.length; i++) &#123;</span><br><span class="line">  <span class="keyword">var</span> paragraph = paragraphs.item(i);</span><br><span class="line">  paragraph.style.setProperty(<span class="string">"color"</span>, <span class="string">"white"</span>, <span class="literal">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<!--D3 employs a declarative approach, operating on arbitrary sets of nodes called selections. For example, you can rewrite the above loop as:-->
+<p>D3采用声明式方法，运行在选中的任意节点上。例如，您可以将上面的循环重写为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d3.selectAll(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="string">"white"</span>);</span><br></pre></td></tr></table></figure>
+<!--Yet, you can still manipulate individual nodes as needed:-->
+<p>而且，您仍然可以根据需要操作单个节点：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d3.select(<span class="string">"body"</span>).style(<span class="string">"background-color"</span>, <span class="string">"black"</span>);</span><br></pre></td></tr></table></figure>
+<!--Selectors are defined by the W3C Selectors API and supported natively by modern browsers. The above examples select nodes by tag name ("p" and "body", respectively). Elements may be selected using a variety of predicates, including containment, attribute values, class and ID.-->
+<p>选择器由W3C Selectors API定义，并由现代浏览器原生支持。以上例子通过标签名称（p 和 body）获取节点。可以使用各种称谓来选择元素，比如属性，类名和 ID。</p>
+<!--D3 provides numerous methods for mutating nodes: setting attributes or styles; registering event listeners; adding, removing or sorting nodes; and changing HTML or text content. These suffice for the vast majority of needs. Direct access to the underlying DOM is also possible, as each D3 selection is simply an array of nodes.-->
+<p>D3 提供了许多改变节点的方法：设置属性或样式、注册事件监听器、添加，删除或者排序节点、改变 HTML 或者文字内容。这些可以满足绝大多数的需求。直接访问 DOM 底层也是可能的，因为每一个 D3 选择集合都是简单的原生节点数组。</p>
+<!--#Dynamic Properties-->
+<h1 id="动态属性"><a href="#动态属性" class="headerlink" title="动态属性"></a>动态属性</h1><!--Readers familiar with other DOM frameworks such as jQuery should immediately recognize similarities with D3. Yet styles, attributes, and other properties can be specified as functions of data in D3, not just simple constants. Despite their apparent simplicity, these functions can be surprisingly powerful; the d3.geoPath function, for example, projects geographic coordinates into SVG path data. D3 provides many built-in reusable functions and function factories, such as graphical primitives for area, line and pie charts.-->
+<p>熟悉其他DOM框架（如jQuery）的读者应立即认识到与 D3 的相似之处。样式，属性和其他属性可以指定为D3中的数据函数，不仅仅是简单的常数。尽管它们显而易见，但这些功能可以令人惊讶地强大;例如，d3.geoPath 函数将地理坐标投影到SVG路径数据中。D3提供了许多内置的可重用函数和函数工厂，例如面积图，线图和饼图的图形基元。</p>
+<!--For example, to randomly color paragraphs:-->
+<p>例如，给段落标签设置随机颜色：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d3.selectAll(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"hsl("</span> + <span class="built_in">Math</span>.random() * <span class="number">360</span> + <span class="string">",100%,50%)"</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<!--To alternate shades of gray for even and odd nodes:-->
+<p>为偶数和奇数节点交替灰度阴影：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d3.selectAll(<span class="string">"p"</span>).style(<span class="string">"color"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d, i</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> i % <span class="number">2</span> ? <span class="string">"#fff"</span> : <span class="string">"#eee"</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<!--Computed properties often refer to bound data. Data is specified as an array of values, and each value is passed as the first argument (d) to selection functions. With the default join-by-index, the first element in the data array is passed to the first node in the selection, the second element to the second node, and so on. For example, if you bind an array of numbers to paragraph elements, you can use these numbers to compute dynamic font sizes:-->
+<p>计算属性通常引用绑定数据。数据被指定为数值数组，并且每个值作为第一个参数（d）传递给选择函数。使用默认的join-by-index，数据数组中的第一个元素将传递给选择中的第一个节点，第二个元素传递给第二个节点，依此类推。例如，如果将数字数组绑定到段落元素，则可以使用这些数字来计算动态字体大小：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d3.selectAll(<span class="string">"p"</span>)</span><br><span class="line">  .data([<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>])</span><br><span class="line">    .style(<span class="string">"font-size"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> d + <span class="string">"px"</span>; &#125;);</span><br></pre></td></tr></table></figure>
+<!--Once the data has been bound to the document, you can omit the data operator; D3 will retrieve the previously-bound data. This allows you to recompute properties without rebinding.-->
+<p>一旦数据绑定到文档，您可以省略数据运算符; D3将检索先前绑定的数据。这允许您在不重新绑定的情况下重新计算属性。</p>
+<h1 id="Enter-and-Exit"><a href="#Enter-and-Exit" class="headerlink" title="Enter and Exit"></a>Enter and Exit</h1><!--Using D3’s enter and exit selections, you can create new nodes for incoming data and remove outgoing nodes that are no longer needed.-->
+<p>使用D3的 enter 和 exit ，您可以为传入数据创建新节点并删除不再需要的传出节点。</p>
+<!--When data is bound to a selection, each element in the data array is paired with the corresponding node in the selection. If there are fewer nodes than data, the extra data elements form the enter selection, which you can instantiate by appending to the enter selection. For example:-->
+<p>当数据被绑定到选择集中，在数据数组中的每一个元素与选择集中对应节点配对。如果节点数量少于数据，多余的 data 元素将会传入 enter 选择集, 您可以通过追加多余选择集来实例化。例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d3.select(<span class="string">"body"</span>)</span><br><span class="line">  .selectAll(<span class="string">"p"</span>)</span><br><span class="line">  .data([<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>])</span><br><span class="line">  .enter().append(<span class="string">"p"</span>)</span><br><span class="line">    .text(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> <span class="string">"I’m number "</span> + d + <span class="string">"!"</span>; &#125;);</span><br></pre></td></tr></table></figure></p>
+<!--Updating nodes are the default selection—the result of the data operator. Thus, if you forget about the enter and exit selections, you will automatically select only the elements for which there exists corresponding data. A common pattern is to break the initial selection into three parts: the updating nodes to modify, the entering nodes to add, and the exiting nodes to remove.-->
+<p>更新节点是默认选择 - 数据运算符的结果。因此，如果您忘记了进入和退出选择，您将自动选择仅存在相应数据的元素。常见的模式是将初始选择分为三个部分：要修改的更新节点，要添加的进入节点以及要删除的现有节点。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Update…</span></span><br><span class="line"><span class="keyword">var</span> p = d3.select(<span class="string">"body"</span>)</span><br><span class="line">  .selectAll(<span class="string">"p"</span>)</span><br><span class="line">  .data([<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>])</span><br><span class="line">    .text(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> d; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Enter…</span></span><br><span class="line">p.enter().append(<span class="string">"p"</span>)</span><br><span class="line">    .text(<span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> d; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Exit…</span></span><br><span class="line">p.exit().remove();</span><br></pre></td></tr></table></figure></p>
+<!--By handling these three cases separately, you specify precisely which operations run on which nodes. This improves performance and offers greater control over transitions. For example, with a bar chart you might initialize entering bars using the old scale, and then transition entering bars to the new scale along with the updating and exiting bars.-->
+<p>通过分别处理这三种情况，可以精确指定在哪些节点上运行哪些操作。这可以提高性能并提供对转换的更好控制。例如，使用条形图，您可以使用旧比例初始化输入条形，然后将输入条形转换为新比例以及更新和退出条形。</p>
+<!--D3 lets you transform documents based on data; this includes both creating and destroying elements. D3 allows you to change an existing document in response to user interaction, animation over time, or even asynchronous notification from a third-party. A hybrid approach is even possible, where the document is initially rendered on the server, and updated on the client via D3.-->
+<p>D3允许您根据数据转换文档;这包括创建和销毁元素。D3允许您更改现有文档以响应用户交互，动画随时间推移，甚至来自第三方的异步通知。甚至可以采用混合方法，其中文档最初在服务器上呈现，并通过D3在客户端上更新。</p>
+<!--#Transformation, not Representation-->
+<h1 id="转换而非表现"><a href="#转换而非表现" class="headerlink" title="转换而非表现"></a>转换而非表现</h1><!--D3 does not introduce a new visual representation. Unlike Processing or Protovis, D3’s vocabulary of graphical marks comes directly from web standards: HTML, SVG, and CSS. For example, you can create SVG elements using D3 and style them with external stylesheets. You can use composite filter effects, dashed strokes and clipping. If browser vendors introduce new features tomorrow, you’ll be able to use them immediately—no toolkit update required. And, if you decide in the future to use a toolkit other than D3, you can take your knowledge of standards with you!-->
+<p>D3没有引入新的视觉表现。与Processing或Protovis不同，D3的图形标记词汇直接来自Web标准：HTML，SVG和CSS。例如，您可以使用D3创建SVG元素，并使用外部样式表对其进行样式设置。您可以使用复合滤镜效果，虚线笔划和剪裁。如果浏览器厂商明天推出新功能，您将能够立即使用它们 - 无需更新工具包。而且，如果您决定将来使用 D3 以外的工具包，您可以随时使用你掌握的标准知识！</p>
+<!--Best of all, D3 is easy to debug using the browser’s built-in element inspector: the nodes that you manipulate with D3 are exactly those that the browser understands natively.-->
+<p>最重要的是，使用浏览器的内置元素检查器可以轻松调试D3：使用D3操作的节点正是浏览器本身可以理解的节点。</p>
+<!--#Transitions-->
+<h1 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h1><!--D3’s focus on transformation extends naturally to animated transitions. Transitions gradually interpolate styles and attributes over time. Tweening can be controlled via easing functions such as “elastic”, “cubic-in-out” and “linear”. D3’s interpolators support both primitives, such as numbers and numbers embedded within strings (font sizes, path data, etc.), and compound values. You can even extend D3’s interpolator registry to support complex properties and data structures.-->
+<p>D3对转换的关注自然延伸到动画转换。随着时间的推移，过渡会逐渐插入样式和属性。可以通过 easeing 函数来控制动画效果 ，例如“elastic”，“cubic-in-out”和“linear”。D3的插值器支持两种基元，例如字符串中嵌入的数字和数字（字体大小，路径数据等）和复合值。您甚至可以扩展D3的插补器注册表以支持复杂的属性和数据结构。</p>
+<!--For example, to fade the background of the page to black:-->
+<p>例如，要将页面背景淡化为黑色：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d3.select(<span class="string">"body"</span>).transition()</span><br><span class="line">    .style(<span class="string">"background-color"</span>, <span class="string">"black"</span>);</span><br></pre></td></tr></table></figure></p>
+<!--Or, to resize circles in a symbol map with a staggered delay:-->
+<p>或者，使用交错延迟调整符号映射中的圆圈：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d3.selectAll(<span class="string">"circle"</span>).transition()</span><br><span class="line">    .duration(<span class="number">750</span>)</span><br><span class="line">    .delay(<span class="function"><span class="keyword">function</span>(<span class="params">d, i</span>) </span>&#123; <span class="keyword">return</span> i * <span class="number">10</span>; &#125;)</span><br><span class="line">    .attr(<span class="string">"r"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123; <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(d * scale); &#125;);</span><br></pre></td></tr></table></figure></p>
+<!--By modifying only the attributes that actually change, D3 reduces overhead and allows greater graphical complexity at high frame rates. D3 also allows sequencing of complex transitions via events. And, you can still use CSS3 transitions; D3 does not replace the browser’s toolbox, but exposes it in a way that is easier to use.-->
+<p>通过仅修改实际更改的属性，D3可降低开销，并在高帧速率下实现更高的图形复杂性。D3还允许通过事件对复杂转换进行排序。并且，您仍然可以使用CSS3过渡; D3不会取代浏览器的工具箱，但会以更易于使用的方式公开它。</p>
+<!--Want to learn more? Read these tutorials.-->
+<p>想要学习更多教程请移步 <a href="https://github.com/d3/d3/wiki/Tutorials" target="_blank" rel="noopener">更多教程</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/D3/" rel="tag"># D3</a>
+          
+            <a href="/tags/数据可视化/" rel="tag"># 数据可视化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/18/graphql-translate/" rel="next" title="GraphQL官方自述文件">
+                <i class="fa fa-chevron-left"></i> GraphQL官方自述文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/21/javascript/" rel="prev" title="Javascript原型链">
+                Javascript原型链 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="ShengFu">
+            
+              <p class="site-author-name" itemprop="name">ShengFu</p>
+              <p class="site-description motion-element" itemprop="description">前端经验总结与知识分享</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/arixse" title="GitHub &rarr; https://github.com/arixse" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:fusheng39@gmail.com" title="E-Mail &rarr; mailto:fusheng39@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#选择集"><span class="nav-number">2.</span> <span class="nav-text">选择集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动态属性"><span class="nav-number">3.</span> <span class="nav-text">动态属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Enter-and-Exit"><span class="nav-number">4.</span> <span class="nav-text">Enter and Exit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换而非表现"><span class="nav-number">5.</span> <span class="nav-text">转换而非表现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换"><span class="nav-number">6.</span> <span class="nav-text">转换</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengFu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+  
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'fQvREDq9PS1FGdzOzlzgyT1d-gzGzoHsz',
+    appKey: '9zS6fOeVSHnBxpTplIUzROfQ',
+    placeholder: '输入你的看法吧',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+</html>

@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="GraphQl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GraphQL官方自述文件">
+<meta property="og:url" content="http://yoursite.com/2019/02/18/graphql-translate/index.html">
+<meta property="og:site_name" content="ShengFu&#39;s blog">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550915827036&di=915d3dbc377cb034b3658fb54a0d0439&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180726%2F6e30a4612eb54d3b8b255777463ffd18.png">
+<meta property="og:updated_time" content="2021-01-02T10:50:07.333Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GraphQL官方自述文件">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550915827036&di=915d3dbc377cb034b3658fb54a0d0439&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180726%2F6e30a4612eb54d3b8b255777463ffd18.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ShengFu's blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/18/graphql-translate/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>GraphQL官方自述文件 | ShengFu's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ShengFu's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">前端，Javascript，html，css,html5,Vue,React,Angular</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/arixse" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/graphql-translate/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ShengFu">
+      <meta itemprop="description" content="前端经验总结与知识分享">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ShengFu's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">GraphQL官方自述文件
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-18 22:52:10" itemprop="dateCreated datePublished" datetime="2019-02-18T22:52:10+08:00">2019-02-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-02 18:50:07" itemprop="dateModified" datetime="2021-01-02T18:50:07+08:00">2021-01-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/翻译计划/" itemprop="url" rel="index"><span itemprop="name">翻译计划</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/02/18/graphql-translate/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/18/graphql-translate/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1550915827036&amp;di=915d3dbc377cb034b3658fb54a0d0439&amp;imgtype=0&amp;src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180726%2F6e30a4612eb54d3b8b255777463ffd18.png" alt=""><br><a id="more"></a><br>原文地址：<a href="https://github.com/facebook/graphql/blob/master/README.md" target="_blank" rel="noopener">https://github.com/facebook/graphql/blob/master/README.md</a></p>
+<p>我们可以在 <a href="https://facebook.github.io/graphql/" target="_blank" rel="noopener">https://facebook.github.io/graphql/</a> 最新发布的<a href="./spec">/spec</a>目录的markdown文件中找到 GraphQL的规范。</p>
+<p>我们可以通过跟踪这个仓库最新的代码提交找到 <a href="https://facebook.github.io/graphql/draft/" target="_blank" rel="noopener">https://facebook.github.io/graphql/draft/</a> 中提到的最近的草案规范。</p>
+<p>我们可以通过对应的 <a href="https://github.com/facebook/graphql/releases" target="_blank" rel="noopener">release tag</a> 在固定的链接找到 GrahpQL 之前的规范。例如，<a href="https://facebook.github.io/graphql/October2016/" target="_blank" rel="noopener">https://facebook.github.io/graphql/October2016/</a> ， 如果直接链接到 GraphQL 规范，则最好链接到特定引用版本的带有永久标记的链接。</p>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a><a name="peg0ab"></a>概览</h2><p>这是一个由Facebook创建的 Api 查询语言规范。</p>
+<p>GraphQL 的受众群体不是客户端开发者，而是那些对构建 GraphQL 开发和工具感兴趣的人。</p>
+<p>为了被广泛采用，GraphQL 必须针对各种客户端、框架和语言，这需要跨项目和组织协作。它的规范是这项工作的协调点。</p>
+<p>在这里可以找到需要的帮助 <a href="https://graphql.org/community/" target="_blank" rel="noopener">from the community</a></p>
+<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a><a name="i31iwq"></a>入门</h2><p>GraphQL 有类型系统、查询语言、语义执行器、静态类型检查和类型自检组成。为了使用户可以了解其中的每一个组件，我们已经完成了一个示例用来说明 GraphQL 的每一个部分。</p>
+<p>这个示例不是全面的，但是它可以快速说明 GraphQL 的核心概念，在深入了解 <a href="https://github.com/graphql/graphql-js" target="_blank" rel="noopener">GraphQL.js</a>之前提供一些基本信息。</p>
+<p>我们想用查询“星球大战三部曲”中人物和地点的信息来演示这个例子。</p>
+<h3 id="类型系统"><a href="#类型系统" class="headerlink" title="类型系统"></a><a name="uu5meg"></a>类型系统</h3><p>任何 GraphQL 的实现核心都是它可以返回对象类型的描述，在类型系统中描述并且在 Schema 中返回。</p>
+<p>在我们“星球大战”的例子中，类型系统被定义在了此文件中 <a href="https://github.com/graphql/graphql-js/blob/master/src/__tests__/starWarsSchema.js" target="_blank" rel="noopener">starWarsSchema.js</a> 。</p>
+<p>在系统中最多的基本类型是 Human,代表了人物，比如像 Luke,Leia 和 Han。在我们系统中所有的人类会有一个名字，所以我们定义 Human 类型必须有一个属性: name. 这个属性会返回一个字符串，并且我们知道这个字符串不是 null(就像每个人类都必须有一个名字一样）。所以我们定义 name 属性为 non-nullable String(非空字符串)。我们在系统规范和文档中始终使用简写符号，我们可以把 Human 类型描述为这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type Human &#123;</span><br><span class="line">  name: String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种简写是为了方便描述类型系统最基本的组成；Javascript 实现功能更全面，并允许记录类型和字段。<br>并且设置了类型系统和底层数据之间的映射关系；对于 GraphQ.js 中的测试用例，底层数据是一组 Javascript 对象<br><a href="https://github.com/graphql/graphql-js/blob/master/src/__tests__/starWarsData.js" target="_blank" rel="noopener">set of JavaScript objects</a> ，但是在大多数情况下，后台数据将通过某些服务进行访问，次类型系统层将负责从类型和字段大道该服务的映射。</p>
+<p>许多 API 中的常见模式，在 GraphQL 中，是为对象提供用于重新获取对象的 ID。所以让我们把它添加到 Human 类型中，并且我们可以添加一个 string 类型的 homeplanet 字段。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type Human &#123;</span><br><span class="line">	id:String,</span><br><span class="line">  name:String,</span><br><span class="line">  homePlanet:String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于我们谈论的是星球大战三部曲，因此描述每个角色出现的剧集会很有用。为此，我们首先定义一个枚举，列出三部曲中的三集。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emnu Episode &#123; NEWHOPE, EMPORE, JEDI&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们可以在 Human 中添加一个字段来描述他们出现在哪儿。这会返回一个剧集的列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">type Human &#123;</span><br><span class="line">	id:String,</span><br><span class="line">  name:String,</span><br><span class="line">  appearsIn:[Episode],</span><br><span class="line">  homeplanet:String</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，让我来介绍一下另一个类型：<code>Droid</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">type Droid &#123;</span><br><span class="line"></span><br><span class="line">  id: String</span><br><span class="line"></span><br><span class="line">  name: String</span><br><span class="line"></span><br><span class="line">  appearsIn: [Episode]</span><br><span class="line"></span><br><span class="line">  primaryFunction: String</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们有两个类型！让我们添加一种方式来联系他们：人类和机器人都有朋友。但是人类可以同时和人类和机器人交朋友。我们如何区分人类还是机器人朋友呢？</p>
+<p>如果我们看一下，我们会返现人来和机器人之间有共同的功能：他们都有 ID 、name和 episodes。所以我们可以添加一个接口，我们的类型系统目前是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">enum Episode &#123; NEWHOPE, EMPIRE, JEDI &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">interface Character &#123;</span><br><span class="line"></span><br><span class="line">  id: String</span><br><span class="line"></span><br><span class="line">  name: String</span><br><span class="line"></span><br><span class="line">  friends: [Character]</span><br><span class="line"></span><br><span class="line">  appearsIn: [Episode]</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">type Human implements Character &#123;</span><br><span class="line"></span><br><span class="line">  id: String</span><br><span class="line"></span><br><span class="line">  name: String</span><br><span class="line"></span><br><span class="line">  friends: [Character]</span><br><span class="line"></span><br><span class="line">  appearsIn: [Episode]</span><br><span class="line"></span><br><span class="line">  homePlanet: String</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">type Droid implements Character &#123;</span><br><span class="line"></span><br><span class="line">  id: String</span><br><span class="line"></span><br><span class="line">  name: String</span><br><span class="line"></span><br><span class="line">  friends: [Character]</span><br><span class="line"></span><br><span class="line">  appearsIn: [Episode]</span><br><span class="line"></span><br><span class="line">  primaryFunction: String</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们或许会问一个问题，有任何字段可以返回 nul l吗？默认情况下，null 在任何GraphQL类型中都是合法的，然而<br>因为完成一个GraphQl查询通常需要和不同的服务端进行通信，这些服务端可能不会返回值。然而如果类型系统可以保证一个类型不会是null，这样的话我们可以把这个类型标记为非空。我们在类型后面加“！”来表示非空字段。我可以更新我们的系统以备注 id 永远不可能为空。</p>
+<p>请注意，在我们当前的实现当中，我们可以保证任何字段都是非空的（因为我们当前的实现中有硬编码数据），<br>我们没有把他们标记为非空。可以想象，我们最终会用实际后端数据代替硬编码数据。通过这些配置，我们允许后端在发生错误的时候返回null,并且告知客户端后端发生了错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">enum Episode &#123; NEWHOPE, EMPIRE, JEDI &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">interface Character &#123;</span><br><span class="line"></span><br><span class="line">  id: String!</span><br><span class="line"></span><br><span class="line">  name: String</span><br><span class="line"></span><br><span class="line">  friends: [Character]</span><br><span class="line"></span><br><span class="line">  appearsIn: [Episode]</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">type Human implements Character &#123;</span><br><span class="line"></span><br><span class="line">  id: String!</span><br><span class="line"></span><br><span class="line">  name: String</span><br><span class="line"></span><br><span class="line">  friends: [Character]</span><br><span class="line"></span><br><span class="line">  appearsIn: [Episode]</span><br><span class="line"></span><br><span class="line">  homePlanet: String</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">type Droid implements Character &#123;</span><br><span class="line"></span><br><span class="line">  id: String!</span><br><span class="line"></span><br><span class="line">  name: String</span><br><span class="line"></span><br><span class="line">  friends: [Character]</span><br><span class="line"></span><br><span class="line">  appearsIn: [Episode]</span><br><span class="line"></span><br><span class="line">  primaryFunction: String</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们错过了最后一部分：类型系统的主入口</p>
+<p>当我们定义一个 Schema，我们定义了一个object类型，他是所有查询的基础。这个类型的名称通常被叫做 Query, 它描述了我们公共顶级API，我们在这个例子中的的 Query 类型看起来像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type Query &#123;</span><br><span class="line">	hero(episode:Eposode): Character</span><br><span class="line">  human(id:String): Human</span><br><span class="line">  droid(id:String):Droid</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，有三个顶级操作，可以在我们的框架中被完成：</p>
+<ul>
+<li>hero 表示 谁是星战三部曲中的英雄人物，它设置了一个可选的参数允许我们查询特定剧集的英雄</li>
+<li>human 接受一个非空参数ID作为查询条件来返回人物ID</li>
+<li>droid 和droids保持一致</li>
+</ul>
+<p>这些字段演示了类型系统的另一个功能：特定参数的字段可以配置他们的行为。</p>
+<p>当我们将整个类型系统打包到一起，将上面的 Query 类型定义为查询入口点，这将创建一个GraphQL Schema。</p>
+<p>这个例子只是初步涉及到了类型系统的表层。这种规范在类型系统部分和 <a href="https://github.com/graphql/graphql-js/blob/master/src/type" target="_blank" rel="noopener">type</a> 目录中详细介绍了该主题。包含实现符合规范的GraphQL 的类型系统代码。</p>
+<h3 id="查询语法"><a href="#查询语法" class="headerlink" title="查询语法"></a><a name="d8hgnw"></a>查询语法</h3><p>GraphQl 查询以声明方式描述了发行者希望从执行GraphQL 查询它们想要的数据。</p>
+<p>在我们的星战例子中，<a href="https://github.com/graphql/graphql-js/blob/master/src/__tests__/starWarsQuery-test.js" target="_blank" rel="noopener">starWarsQueryTests.js</a> 文件是一个测试文件，它使用上面讨论的模式和一组样本数据，在<a href="https://github.com/graphql/graphql-js/blob/master/src/__tests__/starWarsData.js" target="_blank" rel="noopener">starWarsData.js</a>文件中。可以运行此测试文件来执行参考实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">query HeroNameQuery &#123;</span><br><span class="line"> hero &#123;</span><br><span class="line"> 	name</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一行，query HeroNameQuery 定义来一个以schema的根查询类型为开头的操作名称 HeroNameQuery。综上所述，Query 有一个 hero 字段，返回一个Character 类型。Character 有一个String类型的name字段。这个查询的结果将会是这样：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"hero"</span>:&#123;</span><br><span class="line">  	<span class="attr">"name"</span>:<span class="string">"R2-D2"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当一个GraphQL 文档定义多个操作时，指定查询关键词和一个操作名称是唯一的必要条件。所以我们可以用一个查询简写重写之前的查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	hero &#123;</span><br><span class="line">  	name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>假设GraphQL的后端服务数据将以R2-D2来标示hero。响应继续根据请求来变化；如果我们用这个查询来请求 R2-D2 的 ID和 friends 字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">query HeroNameAndFriendsQuery &#123;</span><br><span class="line">	hero &#123;</span><br><span class="line">  	id</span><br><span class="line">    name</span><br><span class="line">    friends &#123;</span><br><span class="line">    	id</span><br><span class="line">      name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，我们会得到想这样的响应：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"hero"</span>:&#123;</span><br><span class="line">  	<span class="attr">"id"</span>:<span class="string">"2001"</span>,</span><br><span class="line">    <span class="attr">"name"</span>:<span class="string">"R2-D2"</span>,</span><br><span class="line">    <span class="attr">"friends"</span>:[</span><br><span class="line">      &#123;</span><br><span class="line">      	<span class="attr">"id"</span>:<span class="string">"1000"</span>,</span><br><span class="line">        <span class="attr">"name"</span>:<span class="string">"Luke Skywalker"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">      	<span class="attr">"id"</span>:<span class="string">"1002"</span>,</span><br><span class="line">        <span class="attr">"name"</span>:<span class="string">"Han solo"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">      	<span class="attr">"id"</span>:<span class="string">"1003"</span>,</span><br><span class="line">        <span class="attr">"name"</span>:<span class="string">"Leia Organa"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Graphql 一个关键的方面是它的嵌套查询能力。在以上的查询中，我们请求了 R2-D2 的 friends，但是我们可以请求更多关于他们每个对象的信息。所以，让我们构造一个查询来请求 R2-D2 的 friends ，获取他们的名称和出现的剧集，然后再次嵌套查询他们每一个的 friends。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">query NestedQuery &#123;</span><br><span class="line">	hero &#123;</span><br><span class="line">  	name</span><br><span class="line">    friends &#123;</span><br><span class="line">    	name</span><br><span class="line">      appersIn</span><br><span class="line">      friends &#123;</span><br><span class="line">      	name</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="attr">"hero"</span>: &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"R2-D2"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="attr">"friends"</span>: [</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Luke Skywalker"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"appearsIn"</span>: [<span class="string">"NEWHOPE"</span>, <span class="string">"EMPIRE"</span>, <span class="string">"JEDI"</span>],</span><br><span class="line"></span><br><span class="line">        <span class="attr">"friends"</span>: [</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"Han Solo"</span> &#125;,</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"Leia Organa"</span> &#125;,</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"C-3PO"</span> &#125;,</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"R2-D2"</span> &#125;</span><br><span class="line"></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Han Solo"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"appearsIn"</span>: [<span class="string">"NEWHOPE"</span>, <span class="string">"EMPIRE"</span>, <span class="string">"JEDI"</span>],</span><br><span class="line"></span><br><span class="line">        <span class="attr">"friends"</span>: [</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"Luke Skywalker"</span> &#125;,</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"Leia Organa"</span> &#125;,</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"R2-D2"</span> &#125;</span><br><span class="line"></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Leia Organa"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"appearsIn"</span>: [<span class="string">"NEWHOPE"</span>, <span class="string">"EMPIRE"</span>, <span class="string">"JEDI"</span>],</span><br><span class="line"></span><br><span class="line">        <span class="attr">"friends"</span>: [</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"Luke Skywalker"</span> &#125;,</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"Han Solo"</span> &#125;,</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"C-3PO"</span> &#125;,</span><br><span class="line"></span><br><span class="line">          &#123; <span class="attr">"name"</span>: <span class="string">"R2-D2"</span> &#125;</span><br><span class="line"></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的查询类型定义一种根据给定ID来查询 human 的方法。我们在查询用采用硬编码的ID：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">query FetchLukeQuery &#123;</span><br><span class="line">	human(id:&quot;1000&quot;) &#123;</span><br><span class="line">  	name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果是：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"human"</span>:&#123;</span><br><span class="line">  	<span class="attr">"name"</span>:<span class="string">"Luke Skywalker"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者，我们可以定义一个具有参数的查询条件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">query FetchSomeIdQuery($someId:String!) &#123;</span><br><span class="line">	human(id:$someId) &#123;</span><br><span class="line">  	name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个查询现在有一个参数：\$someId;为了运行它，我们必须提供那个 ID。如果我们将 \$someId 设为“1000”，我们将获得 Luke。如果设为“1002”，我们将获得 Han。如果我们在这里传递了一个无效的 ID ，我将会得到 human 类型的 null，表明不存在这样的对象。</p>
+<p>注意，在默认情况下响应中的键是字段的 name。为了用不同参数查询同一个字段时简洁明了或者避免键冲突，有时候修改这个键是很有用的。</p>
+<p>我们可以用字段别名处理这种情况，如下面的例子所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">query FeatchLukeAliased &#123;</span><br><span class="line">	luke:human(id:&quot;1000&quot;) &#123;</span><br><span class="line">  	name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们将 human 字段的结果别名为关键字 ”luke.现在响应是：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"luke"</span>:&#123;</span><br><span class="line">  	<span class="attr">"name"</span>: <span class="string">"Luke Skywalker"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，键是 “luke” 而不是 “human”，就像我们之前的例子中没有使用别名一样。</p>
+<p>这种方法在我们想要用两次同样的字段不同的参数时尤其有用，就像下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">query FetchLukeAndLeiaAliased &#123;</span><br><span class="line">	luke:human(id:&quot;1000&quot;) &#123;</span><br><span class="line">  	name</span><br><span class="line">  &#125;</span><br><span class="line">  leia:human(id:&quot;1003&quot;) &#123;</span><br><span class="line">  	name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们别名 human 的第一个结果到 luke ,并且第二个结果到 leia。所以结果是：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"luke"</span>:&#123;</span><br><span class="line">  	<span class="attr">"name"</span>:<span class="string">"Luke Skywalker"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"leia"</span>:&#123;</span><br><span class="line">  	<span class="attr">"name"</span>:<span class="string">"Leia Organa"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们想象，如果我们想要请求 Luke 和 Leia 的母星。我们可以这样做查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">query DuplicateFields &#123;</span><br><span class="line">	luke:human(id:&quot;1000&quot;) &#123;</span><br><span class="line">  	name</span><br><span class="line">    homePlanet</span><br><span class="line">  &#125;</span><br><span class="line">  leia:human(id:&quot;1003&quot;) &#123;</span><br><span class="line">  	name</span><br><span class="line">    homePlanet</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是我们已经可以看到这种方法会变得笨重，由于我们不得不添加新的字段到所有的查询部分。我们可以用提取公共字段到一个片段，并且将这个片段包含到查询中代替，像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">query useFragment &#123;</span><br><span class="line">	luke:human(id:&quot;1000&quot;) &#123;</span><br><span class="line">  	...HumanFragment</span><br><span class="line">  &#125;</span><br><span class="line">  leia:human(id:&quot;1003&quot;) &#123;</span><br><span class="line">  	...HumanFragment</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">frament HumanFragment on Human &#123;</span><br><span class="line">	name</span><br><span class="line">  homePlanet</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两个查询的结果是：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"luke"</span>:&#123;</span><br><span class="line">  	<span class="attr">"name"</span>:<span class="string">"Luke Skywalker"</span>,</span><br><span class="line">    <span class="attr">"homePlanet"</span>:<span class="string">"tatooine"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"leia"</span>:&#123;</span><br><span class="line">  	<span class="attr">"name"</span>:<span class="string">"Leia Organa"</span>,</span><br><span class="line">    <span class="attr">"homePlanet"</span>:<span class="string">"Alderaan"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>UseFragment 和 DuplicateFields 查询都获得相同的结果，但是 UseFragment 更简洁；如果我们想要添加更多字段，我们可以添加到公共的片段而不是拷贝到多个地方。</p>
+<p>在上面我们定义了类型系统，所以我们知道输出中每个对象的类型；可以使用定一个在每个对象尚的特殊字段 __typename 来查询类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query CheckTypeOfR2 &#123;</span><br><span class="line">	hero &#123;</span><br><span class="line">  	__typename</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于R2-D2是 droid 类型，所以会返回：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"hero"</span>:&#123;</span><br><span class="line">  	<span class="attr">"__typename"</span>:<span class="string">"Droid"</span>,</span><br><span class="line">    <span class="attr">"name"</span>:<span class="string">"R2-D2"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们如果想要知道返回的具体类型。这是非常有用的，因为 hero 被定义为返回 Character 接口；如果我们反而请求第五集hero呢：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query CheckTypeOfLuke &#123;</span><br><span class="line">	hero(episode:EMPIRE) &#123;</span><br><span class="line">  	__typename</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们将会发现是 Luke</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"hero"</span>:&#123;</span><br><span class="line">  	<span class="attr">"__typename"</span>:<span class="string">"Huamn"</span>,</span><br><span class="line">    <span class="attr">"name"</span>:<span class="string">"Luke Skywalker"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>与类型系统一样，这个例子只是触及到来查询语言的表层。该规范详细介绍来关于“语言”部分详情，并且，在GraphQL.js 中的 <a href="https://github.com/graphql/graphql-js/blob/master/src/language" target="_blank" rel="noopener">language</a> 目录包含来代码实现了一个规范兼容 GraphQL 查询语言解析器和词法分析器。</p>
+<h3 id="校验系统"><a href="#校验系统" class="headerlink" title="校验系统"></a><a name="ll2dna"></a>校验系统</h3><p>通过使用类型系统，GraphQL 可以预见到一个查询是否有效。这种机制允许服务端或者客户端在无效查询被创建时有效到通知开发者，而不需要依赖运行时的检查。</p>
+<p>在我们的星战例子中，<a href="https://github.com/graphql/graphql-js/blob/master/src/__tests__/starWarsValidation-test.js" target="_blank" rel="noopener">starWarsValidationTests.js</a> 文件中包含了一些常见的示范查询，并且是一个可运行来练习参考实现校验器的测试文件。</p>
+<p>首先，让我们取一个复杂的校验查询。这是一个来自上面部分嵌套查询的例子，但是将重复的字段考虑在一个片段内：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">query NestedQueryWithFragment &#123;</span><br><span class="line">	hero &#123;</span><br><span class="line">  	...NameAndAppearances</span><br><span class="line">    friends&#123;</span><br><span class="line">    	...NameAndAppearances</span><br><span class="line">      friends&#123;</span><br><span class="line">      	...NameAndAppearances</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">fragment NameAndAppearances on Character &#123;</span><br><span class="line">	name</span><br><span class="line">  appearsIn</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并且这个查询是有效的。让我们看一写无效的查询。</p>
+<p>当我们查询字段时，我们必须查询一个在给定类型中存在的字段。例如 hero 返回 Character 类型，我们必须在 Character 上查询一个字段。那个类型不存在 favoriteSpaceship 字段，所以这个查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#INVALID:favoriteSpaceship does not exist on Charcter</span><br><span class="line">query HeroSpaceshipQuery &#123;</span><br><span class="line">	hero &#123;</span><br><span class="line">  	favoriteSpaceship</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>是无效的。</p>
+<p>每当我们查询一个字段并且它返回的不是标量或者枚举，我们必须指定我们想要从字段中获取的数据。Hero 返回 Character 类型，我们一直在请求像 name 和 appearsIn 这样的字段；如果我们忽略这一点，这个查询将会变得无效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># INVALID: hero is not a scalar, so fields are needed</span><br><span class="line">query HeroNoFieldsQuery &#123;</span><br><span class="line">	hero</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样，如果是标量，则查询其他的字段没有意义，这样也会将查询变得无效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># INVALID: name is a scalar, so fields are not permitted</span><br><span class="line">queryHeroFieldsOnScalarQuery &#123;</span><br><span class="line">	hero &#123;</span><br><span class="line">  	name &#123;</span><br><span class="line">    	firstCharacterOfName</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之前，有人在问题中指出一个查询只能查询类型中有的字段；当我们查询将返回 CHaracter 类型的 hero 时，我们只能查询 Character 中存在的字段。但是，如果我们像查询 R2-D2 中主要功能会发生什么？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># INVALID: primaryFunction does not exist on Character</span><br><span class="line">query DriodFieldsOnCaracter &#123;</span><br><span class="line">	hero &#123;</span><br><span class="line">  	name</span><br><span class="line">    primaryFunction</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那个查询是无效的，因为 primaryFunction 不是 Character 中的字段。我们想要一种方式来表示我们希望查询 primaryFunction 如果 Character 是 Droid，否则忽律这个字段。我们可以利用我之前介绍的 fragments 来做这件事。通过设置一个被定义在 Droid 的 fragment 并包含它，我们确保我们仅查询 primaryFunction 被定义的部分。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">query DriodFieldInFragment &#123;</span><br><span class="line">	hero &#123;</span><br><span class="line">  	name</span><br><span class="line">    ...DriodFields</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">fragment DriodFields on Driod &#123;</span><br><span class="line">	primaryFunction</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个查询是有效的，但是它有点冗长。当我们多次使用时，命名片段才是有价值的，但是我们只用了一次。<br>相比与命名一个片段，我们可以用一个行内片段；这仍然允许我们表示我们正在查询的类型，但是不用命名一个分开的片段。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">query DriodFieldsInINLineFragment &#123;</span><br><span class="line">	hero &#123;</span><br><span class="line">  	name</span><br><span class="line">    ...on Driod &#123;</span><br><span class="line">    	primaryFucntion</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这仅仅是触及到了校验系统的表面；那里有许多校验规则来确保 GraphQL 查询在语义上是有意义的。该规范介绍了更多的关于校验主题的详细信息，并且<a href="https://github.com/graphql/graphql-js/blob/master/src/validation" target="_blank" rel="noopener">validation</a> 目录包含了代码实现一个 GraphQL 校验器的兼容规范。</p>
+<h3 id="自我检查"><a href="#自我检查" class="headerlink" title="自我检查"></a><a name="1yg4bi"></a>自我检查</h3><p>向 GraphQL  架构询问有关于它支持的查询信息通常是很有用的。GraphQL 允许我们通过自我检查系统这样做。</p>
+<p>在我们的星战例子中，<a href="https://github.com/graphql/graphql-js/blob/master/src/__tests__/starWarsIntrospection-test.js" target="_blank" rel="noopener">starWarsIntrospectionTests.js</a> 文件包含了一些自我检查系统的示范查询，并且这是一个可以运行来练习参考实现自我检查系统的测试文件。</p>
+<p>我们设计来类型系统，所以我们知道可用的数据类型，但是如果我们没有，我们可以询问 GraphQL ，通过查询 __schema 字段（总是可以查询的根数据类型）。让我们现在开始这样做并且询问什么类型是有效的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">query IntrospectionTypeQuery &#123;</span><br><span class="line">	__schema &#123;</span><br><span class="line">  	types &#123;</span><br><span class="line">    	name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以得到：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="attr">"__schema"</span>: &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">"types"</span>: [</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Query"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Character"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Human"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"String"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Episode"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Droid"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"__Schema"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"__Type"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"__TypeKind"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Boolean"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"__Field"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"__InputValue"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"__EnumValue"</span></span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"__Directive"</span></span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>哇哦，那是很多数据类型。他们是什么？让我对他们进行分组：</p>
+<ul>
+<li><p><strong>Query, Character, Human, Episode, Droid</strong> - 这些在我们类型系统中定义的。</p>
+</li>
+<li><p><strong>String, Boolean</strong> - 这些是类型系统提供的标准类型。</p>
+</li>
+<li><strong>Schema, </strong>Type, <strong>Field, </strong>InputValue, <strong>EnumValue,</strong>Directive - 这些都是以双下划线开头，表示他们是自我检查系统的一部分。</li>
+</ul>
+<p>现在，让我们尝试并且找出一个开始有效查询的部分。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">query InstrospectionQueryTypeQuery &#123;</span><br><span class="line">	__schema &#123;</span><br><span class="line">  	queryType &#123;</span><br><span class="line">    	name</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们得到的结果是：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"__schema"</span>:&#123;</span><br><span class="line">  	<span class="attr">"queryType"</span>:&#123;</span><br><span class="line">    	<span class="attr">"name"</span>:<span class="string">"Query"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而且那个是符合我们在类型系统所介绍的：Query 类型是我们开始的地方。注意这里的命名是按照惯例的。我们可以命名我们的<code>Query</code>类型 否则，如果我们指定它，它仍然会在这里返回 作为查询的起始类型。但是命名为<code>Query</code>是有用的 惯例。</p>
+<p>检查一个具体的类型通常是有用的。让我们看看 Droid 类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">query InstrospectionDroidTypeQuery &#123;</span><br><span class="line">	__type(name:&quot;Droid&quot;) &#123;</span><br><span class="line">  	name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们会得到结果：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"type"</span>:&#123;</span><br><span class="line">  	<span class="attr">"name"</span>:<span class="string">"Droid"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是如果我们向了解更多关于 Droid 。例如，它是一个接口还是对象？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query IntrospectionDroidKindQuery &#123;</span><br><span class="line">	__tyoe(name:&quot;Doid&quot;) &#123;</span><br><span class="line">  	name,</span><br><span class="line">    kind</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，我们会得到：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="attr">"__type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Droid"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="attr">"kind"</span>: <span class="string">"OBJECT"</span></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>kind 返回一个 __TypeKind ，其中一个值是 OBJECT。如果我们查询 Character 呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">query InstrospectionCharacterKindQuery &#123;</span><br><span class="line">	__type(name:&quot;Character&quot;) &#123;</span><br><span class="line">  	name</span><br><span class="line">    kind</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，我们会得到：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="attr">"__type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Character"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="attr">"kind"</span>: <span class="string">"INTERFACE"</span></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们发现它是一个接口类型。</p>
+<p>一个对象知道什么字段是可用的很有用，所以关于 Droid 询问自我检查系统：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">query InstrospectionDroidFiedldsQuery &#123;</span><br><span class="line">	__type(name:&quot;Droid&quot;) &#123;</span><br><span class="line">  	name</span><br><span class="line">    fields &#123;</span><br><span class="line">    	name</span><br><span class="line">      type &#123;</span><br><span class="line">      	name</span><br><span class="line">        kind</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，我们会得到：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="attr">"__type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Droid"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="attr">"fields"</span>: [</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"id"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">          <span class="attr">"name"</span>: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"NON_NULL"</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"name"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"String"</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"SCALAR"</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"friends"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">          <span class="attr">"name"</span>: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"LIST"</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"appearsIn"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">          <span class="attr">"name"</span>: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"LIST"</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"primaryFunction"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"String"</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"SCALAR"</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>它们是我们定义在 Droid 上面的字段。</p>
+<p>id 在这里看起来有点奇怪，它没有该类型的名称。那是因为它是一种<br>为 NON_NULL 的包装类型。如果我们查询该字段类型的 ofType，我们可以在这里找到 String 类型，告诉我们这是一个非空的字符串。</p>
+<p>同样，friends 和 appearsIn 都没有 name，因为它们是 LIST 的包装类型。我们在这些类型中查询 ofType，告诉我们这些是什么列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">query IntrospectionDroidWrappedFieldsQuery &#123;</span><br><span class="line"></span><br><span class="line">  __type(name: &quot;Droid&quot;) &#123;</span><br><span class="line"></span><br><span class="line">    name</span><br><span class="line"></span><br><span class="line">    fields &#123;</span><br><span class="line"></span><br><span class="line">      name</span><br><span class="line"></span><br><span class="line">      type &#123;</span><br><span class="line"></span><br><span class="line">        name</span><br><span class="line"></span><br><span class="line">        kind</span><br><span class="line"></span><br><span class="line">        ofType &#123;</span><br><span class="line"></span><br><span class="line">          name</span><br><span class="line"></span><br><span class="line">          kind</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，我们会得到：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="attr">"__type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Droid"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="attr">"fields"</span>: [</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"id"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">          <span class="attr">"name"</span>: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"NON_NULL"</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"ofType"</span>: &#123;</span><br><span class="line"></span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"String"</span>,</span><br><span class="line"></span><br><span class="line">            <span class="attr">"kind"</span>: <span class="string">"SCALAR"</span></span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"name"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"String"</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"SCALAR"</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"ofType"</span>: <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"friends"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">          <span class="attr">"name"</span>: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"LIST"</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"ofType"</span>: &#123;</span><br><span class="line"></span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"Character"</span>,</span><br><span class="line"></span><br><span class="line">            <span class="attr">"kind"</span>: <span class="string">"INTERFACE"</span></span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"appearsIn"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">          <span class="attr">"name"</span>: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"LIST"</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"ofType"</span>: &#123;</span><br><span class="line"></span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"Episode"</span>,</span><br><span class="line"></span><br><span class="line">            <span class="attr">"kind"</span>: <span class="string">"ENUM"</span></span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line"></span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"primaryFunction"</span>,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"String"</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"SCALAR"</span>,</span><br><span class="line"></span><br><span class="line">          <span class="attr">"ofType"</span>: <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个自我检查系统的工具特性结束尤其有用；让我们查询文档系统。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">query IntrospectionDroidDescriptionQuery &#123;</span><br><span class="line"></span><br><span class="line">  __type(name: &quot;Droid&quot;) &#123;</span><br><span class="line"></span><br><span class="line">    name</span><br><span class="line"></span><br><span class="line">    description</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>产出是：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="attr">"__type"</span>: &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Droid"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="attr">"description"</span>: <span class="string">"A mechanical creature in the Star Wars universe."</span></span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>所以我们可以用自我检查系统来访问类型系统的文档，并且可以创建浏览器文档或者富应用 IDE 工具。</p>
+<p>这也只是触及到来自我检查系统的表面；我们可以查询枚举值，类型实现的接口等待。我们甚至可以检查自我检查系统本省。在 Introspection 部分可以看到相关主题的更多详细信息，并且 <a href="https://github.com/graphql/graphql-js/blob/master/src/type/introspection.js" target="_blank" rel="noopener">introspection</a> 文件包含了自我检查系统查询的兼容规范代码实现。</p>
+<h3 id="其它内容"><a href="#其它内容" class="headerlink" title="其它内容"></a><a name="e8pyxk"></a>其它内容</h3><p>这个自述文件介绍了有关于类型系统，查询执行，校验和自我检查系统的参考实现。<a href="https://github.com/graphql/graphql-js/" target="_blank" rel="noopener">GraphQL.js</a> 和规范中还有更多信息，包含了执行查询，响应格式化，解释类型系统如何映射到底层实现，GraphQL 响应格式化和 GraphQL 的语法描述和实现。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GraphQl/" rel="tag"># GraphQl</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/03/Vue防坑指南/" rel="next" title="Vue防坑指南">
+                <i class="fa fa-chevron-left"></i> Vue防坑指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/18/d3-translate/" rel="prev" title="D3官方网站首页翻译">
+                D3官方网站首页翻译 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpeg" alt="ShengFu">
+            
+              <p class="site-author-name" itemprop="name">ShengFu</p>
+              <p class="site-description motion-element" itemprop="description">前端经验总结与知识分享</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/arixse" title="GitHub &rarr; https://github.com/arixse" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:fusheng39@gmail.com" title="E-Mail &rarr; mailto:fusheng39@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#入门"><span class="nav-number">2.</span> <span class="nav-text">入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类型系统"><span class="nav-number">2.1.</span> <span class="nav-text">类型系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询语法"><span class="nav-number">2.2.</span> <span class="nav-text">查询语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#校验系统"><span class="nav-number">2.3.</span> <span class="nav-text">校验系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自我检查"><span class="nav-number">2.4.</span> <span class="nav-text">自我检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它内容"><span class="nav-number">2.5.</span> <span class="nav-text">其它内容</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengFu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+  
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'fQvREDq9PS1FGdzOzlzgyT1d-gzGzoHsz',
+    appKey: '9zS6fOeVSHnBxpTplIUzROfQ',
+    placeholder: '输入你的看法吧',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1}});</script></body>
+</html>
